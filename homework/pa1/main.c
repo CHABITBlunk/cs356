@@ -60,7 +60,6 @@ char *scencrypt(const char *msgfname, const char *keyfname,
       j = 0;
     }
     out[i] = msg[i] ^ key[j];
-    i++;
     j++;
   }
 
