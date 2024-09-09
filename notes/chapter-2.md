@@ -132,6 +132,25 @@
     - lib-based tape encryption
     - background laptop/pc data encryption, disk
 
+### elliptic curve cryptography
+
+- operates on elliptic curve mathematical equations
+- utilizes a set of points to form ecc operations
+- each key corresponds to a point on the curve
+  - private key (random number)
+  - public key (derived from private key via scalar multiplication, i.e. a series of dot products)
+- public key generation
+  - perform repeated additions (dot products) of a point on the elliptic curve a certain number of times
+    - num repetitions determined by private key
+- advantages
+  - efficient - shorter key lengths
+  - resistant to quantum attacks
+  - scalable
+    - widely used in modern cryptographic protocols (tls)
+    - suitable for resource-constrained applications (e.g. iot)
+
+## message authentication
+
 ### message authentication
 
 - protects against active attacks
@@ -160,3 +179,28 @@
   - passwords
   - intrusion detection
     - store H(F) for each file on system & secure hash values
+
+### digital signatures
+
+- used for authenticating both source & data integrity
+- created by encrypting hash code with private key
+- doesn't provide confidentiality
+  - even in case of complete encryption, message safe from alteration but not eavesdropping
+
+## random numbers
+
+### use of random numbers
+
+- keys for public-key algorithms
+- stream key for symmetric stream cipher
+- symmetric key for use as temporary session key or in creating digital envelope
+- handshaking to prevent replay attacks
+- session key
+
+### pseudorandom vs random
+
+- often use algorithmic technique to create pseudorandom numbers which satisfy statistical randomness tests
+  - caveat: likely predictable
+- true rng use a nondeterministic source
+  - e.g. radiation, gas discharge, leaky capacitors
+  - increasingly provided on modern processors
