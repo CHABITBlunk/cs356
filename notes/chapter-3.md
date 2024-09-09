@@ -71,3 +71,75 @@
   - output translated to 11-char sequence
 - now regarded as inadequate
   - still often required for compatibility with existing account mgmt software or multivendor environments
+
+### improved implementations
+
+- recommended hash function based on md5
+  - salt up to 48 bits
+  - password length unlimited
+  - produces 128-bit hash
+  - uses inner loop with 1000 iterations to achieve slowdown
+- openbsd uses blowfish block cipher based hash algorithm called bcrypt
+  - most secure version of unix hash/salt scheme
+  - uses 128-bit salt to create 192-bit hash value
+
+### password cracking
+
+- dictionary attacks
+  - develop large dictionary of possible passwords & try each against password file
+  - each password must be hashed using each salt value, then compared to stored hash values
+- rainbow table attacks
+  - pre-compute enormous table of hash values for all salts
+  - can be countered by using sufficiently large salt value & hash length
+
+### password file access control
+
+- can block offline guessing attacks by denying access to encrypted passwords
+- make available only to privileged users
+- shadow password file
+  - separate file from user ids where hashed passwords are kept
+- vulnerabilities
+  - weakness in os that allows access to file
+  - accident with persmisisons making it readable
+  - users with same password on other systems
+  - access from backup media
+  - sniff passwords in network traffic
+
+### password selection techniques
+
+- user education
+  - users can be told importance of using hard-to-guess passwords & can be provided with guideines for selecting strong passwords
+- computer generated passwords
+  - users have trouble remembering them
+- reactive password checking
+  - system periodically runs its own password cracker to find guessable passwords
+- proactive password checking
+  - user allowed to select their own password, however system checks to see if password allowable, if not, rejects it
+  - goal is to eliminate guessable passwords while allowing user to select a password that is memorable
+
+### proactive password checking
+
+- password cracker
+  - compile large dictionary of passwords to not use
+- rule enforcement
+  - specific rules that passwords must adhere to
+- bloom filter
+  - probabilistic data structure using a bit map. hash a word n times & place a 1 at bit index for each hash
+  - by definition, this can check for if a value is "possibly in the set" or "definitely not in the set"
+    - can get false positives
+  - extremely efficient, all you need is a few hash functions
+  - used to build a table based on dictionary using hashes
+  - check desired password against this table
+
+## other authentication methods
+
+### token authentication
+
+- object user possesses to authenticate
+  - e.g. embossed card, magnetic stripe card, memory card, smartcard
+
+### biometric authentication
+
+- attempts to authenticate sb based on unique physical characteristics
+- based on pattern recognition
+- technically complex & expensive compared to passwords & tokens
