@@ -73,11 +73,33 @@ char *scencrypt(const char *msgfname, const char *keyfname,
   return EXIT_SUCCESS;
 }
 
+void padchars(char block[16]) {
+  for (int i = 0; i < 16; i++) {
+    if (block[i] == 0 && block[i + 1] == 0) {
+      block[i] = 8;
+      if (i <= 15) {
+        block[i + 1] = 1;
+      }
+    }
+  }
+}
+
 // function to encrypt using a block cipher
 int bcencrypt(const char *infname, const char *keyfname) {
-  FILE *fp = fopen(infname, "r");
-  char block[16];
-  fgets(block, 16, fp); // TODO: this is half-assed, needs to be fixed asap
-  // TODO: read the file in blocks of 16 until you reach EOF
+  FILE *keyfp = fopen(keyfname, "r");
+  struct stat keyst;
+  stat(keyfname, &keyst);
+  if (keyst.st_size > 16) {
+    printf("key longer than 16 bytes\n");
+    return EXIT_FAILURE;
+  }
+  char keyblock[16];
+  fgets(keyblock, sizeof(keyblock), keyfp);
+  padchars(keyblock);
+  FILE *infp = fopen(infname, "r");
+  struct stat inst;
+  stat(infname, &inst);
+  if (inst.st_size < 16) {
+  }
   return EXIT_SUCCESS;
 }
