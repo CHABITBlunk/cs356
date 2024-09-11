@@ -143,3 +143,37 @@
 - attempts to authenticate sb based on unique physical characteristics
 - based on pattern recognition
 - technically complex & expensive compared to passwords & tokens
+
+### remote user authentication
+
+- authentication over network more complex
+  - problems of eavesdropping & relay
+- generally use challenge-response
+  - user sends id
+  - host responds with random num
+  - user computes f(r, h(P)), sends back
+  - host compares value from user with own computed value, if match, user authenticated
+- protects against many attacks
+
+### password protocol
+
+- user transmits id to remote host
+- host generates random number (nonce)
+- nonce returned to user
+- host stores hash code of password
+- function in which password hash is one of the arguments
+- use of random number helps defend against adversary capturing user's transmisison
+
+### token protocol
+
+- user transmits id to host
+- host returns random number & ids
+- token either stores static passcode or generates one-time random passcode
+
+### static biometric protocol
+
+- user transmits id to host
+- host returns random number & ids
+- client system controls viometric device on user side
+- host decrypts incoming message & compares to locally stored values
+- host provides authentication by comparing incoming device id to a list of registered devices at host database
