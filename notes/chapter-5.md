@@ -178,3 +178,26 @@
     - firewalls, authentication, general access control systems, db access control systems, db encryption
     - encryption becomes last line of defense in db security
   - can be applied to entire db, at record level, attr level, or field level
+- disadvantages
+  - key mgmt
+    - authorized users must have access to decryption key for data for which they have access
+  - inflexibility
+    - when part or all of db is encrypted, it becomes more difficult to do record searching
+
+### data center security
+
+- data center
+  - an enterprise facility that houses a large number of servers, storage devices, & network switches & equipment
+  - number of servers & storage devices can be as high as tens of thousands
+  - generally includes redundant/backup power supplies, redundant network connections, environmental controls, & various security devices
+  - can occupy 1 room of a building, 1+ floors, or an entire building
+- use cases
+  - cloud service providers
+  - search engines
+  - large scientific research facilities
+  - it facilities
+
+### tia-492
+
+- telecomms industry association (tia)
+- tia-492 (standard for data centers) specifies min requirements for telecomms infrastructure of data centers
