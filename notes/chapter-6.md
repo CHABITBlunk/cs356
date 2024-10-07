@@ -256,3 +256,143 @@
 - metamorphic
 - transport vehicles
 - zero-day exploit
+
+### mobile code
+
+- programs that can be shipped unchanged to a heterogeneous collection of platforms & executed with identical semantics
+- transmitted from a remote system to a local system, then executed on local system
+- often acts as carrier for viruses, worms, or trojans
+- takes advantage of vulnerabilities to perform its own exploits
+- popular vehicles
+  - java applets
+  - activex
+  - javascript
+  - vbscript
+- common ways of using mobile code for malicious operations on a local system
+  - cross-site scripting
+  - interactive & dynamic websites
+  - email attachments
+  - downloads from untrusted sites/software
+
+### mobile phone worms
+
+- first: cabir worm (2004)
+- lasco & commwarrior (2005)
+- communicate through bluetooth or mms
+- targets smartphone
+- can completely disable phone, delete data on phone, or force device to send costly messages
+- commwarrior replicates via bluetooth to other phones, sends itself as an mms file to contacts & as an auto reply to incoming texts
+
+### worm countermeasures
+
+- overlaps with antivirus
+- once worm is on system, av can detect
+- worms also cause significant net activity
+- worm defense approaches
+  - signature-based worm scan filtering
+  - filter-based worm containment
+  - payload classification-based worm containment
+  - threshold random walk scan detection
+  - rate limiting/halting
+
+## other kinds of malware
+
+### drive-by downloads
+
+- exploits browser & plugin vulnerabilities so when user views attacker-controlled webpage, page contains code that exploits bug to install malware on system without user's knowledge or consent
+- in most cases, malware doesn't actively propagate like a worm
+- spreads when users visit webpage
+
+### watering hole attacks
+
+- variant of drive-by download used in highly targeted attacks
+- attacker researches intended victims to identify websites they're likely to visit, then scans these sites to identify those with vulnerabilities that allow their compromise
+- wait for intended victims to visit compromised sites
+- attack code may even be written so that it will only infect systems belonging to target org & take no action for other visitors to site
+- greatly increases likelihood of site compromise remaining undetected
+
+### malvertising
+
+- places malware on sites without compromising them
+- attacker pays for advertisements that are highly likely to be placed on intended target websites & incorporate malware in them
+- attackers use ads to infect visitors to sites
+- malware code may be dynamically generated to reduce chance of detection or only infect specific systems
+- has grown rapidly in recent years because they're easy to place on desired sites, raises little concern, hard to track
+- attackers can place these ads very quickly when they expect their intended victims to browse the website, greatly reducing visibility
+
+### clickjacking
+
+- aka ui redress attack
+- using similar technique, keystrokes can also be hijacked
+  - user can be led to believe they're typing in password, but are typing into invisible frame controlled by attacker
+- vulnerability used by attacker to collect an infected user's clicks
+
+### social engineering
+
+- spam
+  - unsolicited bulk email
+  - significant carrier of malware
+  - used for phishing
+- trojan
+  - program/utility containing harmful hidden code
+  - used to accomplish functions that attacker can't do directly
+- mobile trojans
+  - first: skuller (2004)
+  - target is smartphone
+
+### bots
+
+- program taking over other computers
+- used to launch hard-to-trace attacks
+- if coordinated, this forms a botnet
+- characteristics
+  - remote control facility via irc/http
+  - spreading mechanism
+    - attack software, vulnerability, scanning strategy
+- various applicable countermeasures
+
+### rootkits
+
+- set of programs installed for admin access
+- malicious & stealthy changes to host os
+- may hide its existence
+  - subverting report mechanisms on procs, files, registry entries, &c
+- may be
+  - persistent, memory-based, or vm-based
+  - user mode, kernel mode, or external mode
+- installed by user via trojan or intruder
+- range of necessary countermeasures
+
+### malware countermeasures
+
+- ideally, prevention
+  - policy
+  - awareness
+  - vulnerability mitigation
+  - threat mitigation
+- when & if prevention fails
+  - detection
+  - identification
+  - removal
+- antivirus
+  - 1st gen - simple scanners
+  - 2nd gen - heuristic scanners
+  - 3rd gen - activity traps
+  - 4th gen - full-featured protection
+- sandboxing
+  - running potentially malicious code in a sandbox to monitor behavior without damaging real system
+- host based behavior blocking software
+- digital immune systems
+
+### perimeter scanning approaches
+
+- antivirus software typically included in mail & web proxy services running on an org's firewall & dis
+- may also be included in dis traffic analysis component
+- may include intrusion prevention measures, blocking flow of any suspicious traffic
+- approach is limited to scanning malware
+- ingress monitors
+  - located at border between enterprise network & internet
+  - 1 technique is to look for incoming traffic to unused local ip addrs
+- egress monitors
+  - located at egress point of individual lans as well as at border between enterprise network & internet
+  - monitors outgoing traffic for signs of scanning or other suspicious behavior
