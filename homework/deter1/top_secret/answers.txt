@@ -1,0 +1,11 @@
+Name: Habit Blunk
+Email: jmaster@colostate.edu
+DETER username: csu356yejx
+/usr/share/pixmaps/xbzf136INTRO-1.jpg - Forbidden Planet
+/dev/136intro-2jjaj.JPEG - Godzilla
+/var/log/136intro-3.jpg - It Came from Outer Space
+/etc/wuer136intro-4.JPG - The Fly
+/.hidden/asdf136Intro-5kqlw.jpeg - 2001: a Space Odyssey
+The /var directory is reserved for files that change frequently when the system is running.
+The /dev directory holds pointers to devices in the system, hence the name.
+The vendor id of this node's CPU model is AuthenticAMD.
