@@ -76,10 +76,16 @@ void padchars(char *block, unsigned size) {
   }
 }
 
+void removepadding(char *block, unsigned size) {
+  while (size > 0 && block[size - 1] == 0x0) {
+    size--;
+  }
+}
+
 void swapchars(char *block, unsigned size, int reverse) {
   if (reverse) {
     for (unsigned i = 0, j = size - 1; i < j; i++, j--) {
-      if (block[j] % 2 == 0) {
+      if (block[j] % 2 == 1) {
         char temp = block[j];
         block[j] = block[i];
         block[i] = temp;
@@ -87,7 +93,7 @@ void swapchars(char *block, unsigned size, int reverse) {
     }
   } else {
     for (unsigned i = 0, j = size - 1; i < j; i++, j--) {
-      if (block[i] % 2 == 0) {
+      if (block[i] % 2 == 1) {
         char temp = block[i];
         block[i] = block[j];
         block[j] = temp;
@@ -98,7 +104,7 @@ void swapchars(char *block, unsigned size, int reverse) {
 
 void blockxor(const char *msg, const char *key, char *output, unsigned size) {
   for (unsigned i = 0; i < size; i++) {
-    output[i] = msg[i] ^ key[i];
+    output[i] = key[i] ^ msg[i];
   }
 }
 
@@ -148,10 +154,11 @@ int bcencryptdecrypt(const char *msgfname, const char *keyfname,
 
     if (encrypt) {
       blockxor(msgblock, key.content, output, key.size);
-      swapchars(msgblock, key.size, 0);
+      swapchars(output, key.size, 0);
     } else {
-      swapchars(output, key.size, 1);
+      swapchars(msgblock, key.size, 1);
       blockxor(msgblock, key.content, output, key.size);
+      removepadding(output, key.size);
     }
 
     fwrite(output, 1, key.size, out);
@@ -174,7 +181,7 @@ int main(int argc, char *argv[]) {
   }
 
   if (!(strcmp(argv[5], "E") == 0 || strcmp(argv[5], "D") == 0)) {
-    printf("Invalid Mode Type\n");
+    fprintf(stderr, "Invalid Mode Type\n");
     return EXIT_FAILURE;
   }
 
