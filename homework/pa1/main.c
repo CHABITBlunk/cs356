@@ -13,7 +13,7 @@ struct message read_message(const char *fname) {
   struct message out;
   FILE *fp = fopen(fname, "r");
   if (fp == NULL) {
-    perror("fopen");
+    printf("File Does Not Exist\n");
     exit(EXIT_FAILURE);
   }
 
@@ -173,14 +173,18 @@ int main(int argc, char *argv[]) {
     return EXIT_FAILURE;
   }
 
+  if (!(strcmp(argv[5], "E") == 0 || strcmp(argv[5], "D") == 0)) {
+    printf("Invalid Mode Type\n");
+    return EXIT_FAILURE;
+  }
+
   if (strcmp(argv[1], "B") == 0) {
     return bcencryptdecrypt(argv[2], argv[4], argv[3],
                             strcmp(argv[5], "E") == 0);
   } else if (strcmp(argv[1], "S") == 0) {
     return scencrypt(argv[2], argv[4], argv[3]);
   } else {
-    fprintf(stderr, "invalid mode type\n use 'B' for block cipher or 'S' for "
-                    "stream cipher\n");
+    fprintf(stderr, "Invalid Function Type\n");
     return EXIT_FAILURE;
   }
 }
